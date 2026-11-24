@@ -187,14 +187,22 @@ export const DEFAULT_AMOUNT_COLUMN_WIDTHS: AmountColumnWidths = {
 const AMOUNT_COLUMN_CHAR_WIDTH = 7;
 const AMOUNT_COLUMN_PADDING = 16;
 
-function measureAmountColumnWidth(values: string[], minWidth: number) {
+// The running balance is rendered in a semibold weight, whose digits are a
+// little wider than regular ones.
+const BALANCE_COLUMN_CHAR_WIDTH = 7.6;
+
+function measureAmountColumnWidth(
+  values: string[],
+  minWidth: number,
+  charWidth = AMOUNT_COLUMN_CHAR_WIDTH,
+) {
   const maxChars = values.reduce(
     (max, value) => Math.max(max, value.length),
     0,
   );
   return Math.max(
     minWidth,
-    maxChars * AMOUNT_COLUMN_CHAR_WIDTH + AMOUNT_COLUMN_PADDING,
+    Math.ceil(maxChars * charWidth) + AMOUNT_COLUMN_PADDING,
   );
 }
 
@@ -219,6 +227,7 @@ export function useAmountColumnWidths(
     balance: measureAmountColumnWidth(
       balanceValues,
       DEFAULT_AMOUNT_COLUMN_WIDTHS.balance,
+      BALANCE_COLUMN_CHAR_WIDTH,
     ),
   };
 }
@@ -2088,7 +2097,7 @@ const Transaction = memo(function Transaction({
                   ? theme.numberNegative
                   : theme.numberPositive,
             }}
-            style={{ ...styles.tnum, ...amountStyle }}
+            style={{ ...styles.tnum, ...amountStyle, fontWeight: 600 }}
             width={amountColumnWidths.balance}
             textAlign="right"
             privacyFilter
