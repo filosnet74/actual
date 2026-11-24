@@ -10,6 +10,7 @@ import { theme } from './theme';
 import {
   componentSizeControl,
   componentSizeText,
+  radius,
   sizeResponsiveStyles,
 } from './tokens';
 import type { ComponentSize } from './tokens';
@@ -222,11 +223,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           margin: 0,
           overflow: 'hidden',
           display: 'flex',
-          borderRadius: 4,
+          borderRadius: radius.sm,
           backgroundColor: backgroundColor[variantWithDisabled],
           border: _getBorder(variant, variantWithDisabled),
           color: textColor[variantWithDisabled],
-          transition: 'box-shadow .25s',
+          transition:
+            'background-color 120ms ease, color 120ms ease, border-color 120ms ease, box-shadow .25s',
           WebkitAppRegion: 'no-drag',
           ...styles.smallText,
           ...sizeOverrides,

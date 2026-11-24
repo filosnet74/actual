@@ -142,7 +142,7 @@ export const colors = {
     dark: 'gray700',
     midnight: 'gray700',
     description:
-      'Bottom colour of the sidebar\'s vertical gradient; the top is sidebarBackground.',
+      "Bottom colour of the sidebar's vertical gradient; the top is sidebarBackground.",
   },
   sidebarItemBackgroundPending: { all: 'orange200' },
   sidebarItemBackgroundPositive: {

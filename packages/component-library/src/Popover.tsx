@@ -2,11 +2,22 @@ import { useCallback, useEffect, useRef } from 'react';
 import type { ComponentProps } from 'react';
 import { Popover as ReactAriaPopover } from 'react-aria-components';
 
-import { css } from '@emotion/css';
+import { css, keyframes } from '@emotion/css';
 
 import { styles } from './styles';
 
 type PopoverProps = ComponentProps<typeof ReactAriaPopover>;
+
+// Subtle fade + lift when a popover or menu opens, and a quicker fade when
+// it closes.
+const popoverEnter = keyframes({
+  from: { opacity: 0, transform: 'translateY(-4px) scale(0.98)' },
+  to: { opacity: 1, transform: 'translateY(0) scale(1)' },
+});
+const popoverExit = keyframes({
+  from: { opacity: 1 },
+  to: { opacity: 0 },
+});
 
 let safeAreaBoundary: HTMLElement | null = null;
 
@@ -69,6 +80,15 @@ export const Popover = ({
         ...styles.lightScrollbar,
         padding: 0,
         userSelect: 'none',
+        '&[data-entering]': {
+          animation: `${popoverEnter} 140ms cubic-bezier(0.2, 0, 0, 1)`,
+        },
+        '&[data-exiting]': {
+          animation: `${popoverExit} 100ms ease-in`,
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          '&[data-entering], &[data-exiting]': { animation: 'none' },
+        },
         ...style,
       })}
       shouldCloseOnInteractOutside={element => {

@@ -63,6 +63,30 @@ import { Balances } from './Balance';
 import { BalanceHistoryGraph } from './BalanceHistoryGraph';
 import { ReconcileMenu, ReconcilingMessage } from './Reconcile';
 
+// Uniform outlined "ghost" buttons for the account toolbar (Bank Sync,
+// Import, Add New, Filter, Collapse upcoming and the months select).
+const toolbarActionsStyle = {
+  flexWrap: 'wrap',
+  '& button': {
+    height: 30,
+    padding: '0 10px',
+    border: `1px solid ${theme.formInputBorder}`,
+    borderRadius: 6,
+    backgroundColor: theme.tableBackground,
+    color: theme.pageText,
+    transition: 'background-color 120ms ease, border-color 120ms ease',
+  },
+  '& button[data-hovered]': {
+    backgroundColor: theme.tableRowBackgroundHover,
+    borderColor: theme.tableBorderSeparator,
+  },
+  '& button[aria-pressed="true"]': {
+    backgroundColor: theme.buttonNormalSelectedBackground,
+    color: theme.buttonNormalSelectedText,
+    borderColor: theme.buttonNormalSelectedBackground,
+  },
+} as const;
+
 type AccountHeaderProps = {
   tableRef: TableRef;
   isNameEditable: boolean;
@@ -341,50 +365,55 @@ export function AccountHeader({
           />
         </View>
         <SpaceBetween gap={10} style={{ marginTop: 12 }}>
-          {canSync && (
-            <Button
-              variant="bare"
-              onPress={onSync}
-              isDisabled={isServerOffline}
-            >
-              <AnimatedRefresh
-                width={13}
-                height={13}
-                animating={
-                  account
-                    ? accountsSyncing.includes(account.id)
-                    : accountsSyncing.length > 0
-                }
-              />{' '}
-              {isServerOffline ? t('Bank Sync Offline') : t('Bank Sync')}
-            </Button>
-          )}
+          <SpaceBetween gap={6} style={toolbarActionsStyle}>
+            {canSync && (
+              <Button
+                variant="bare"
+                onPress={onSync}
+                isDisabled={isServerOffline}
+              >
+                <AnimatedRefresh
+                  width={13}
+                  height={13}
+                  animating={
+                    account
+                      ? accountsSyncing.includes(account.id)
+                      : accountsSyncing.length > 0
+                  }
+                />{' '}
+                {isServerOffline ? t('Bank Sync Offline') : t('Bank Sync')}
+              </Button>
+            )}
 
-          {account && !account.closed && (
-            <Button variant="bare" onPress={onImport}>
-              <SvgDownloadThickBottom
-                width={13}
-                height={13}
-                style={{ marginRight: 4 }}
-              />{' '}
-              <Trans>Import</Trans>
-            </Button>
-          )}
+            {account && !account.closed && (
+              <Button variant="bare" onPress={onImport}>
+                <SvgDownloadThickBottom
+                  width={13}
+                  height={13}
+                  style={{ marginRight: 4 }}
+                />{' '}
+                <Trans>Import</Trans>
+              </Button>
+            )}
 
-          {!showEmptyMessage && (
-            <Button variant="bare" onPress={onAddTransaction}>
-              <SvgAdd width={10} height={10} style={{ marginRight: 3 }} />
-              <Trans>Add New</Trans>
-            </Button>
-          )}
-          <View style={{ flexShrink: 0 }}>
-            {/* @ts-expect-error fix me */}
-            <FilterButton onApply={onApplyFilter} />
-          </View>
-          {upcomingCount > 0 && (
-            <UpcomingToggleButton accountId={accountId} count={upcomingCount} />
-          )}
-          {!showEmptyMessage && <UpcomingMonthsSelect />}
+            {!showEmptyMessage && (
+              <Button variant="bare" onPress={onAddTransaction}>
+                <SvgAdd width={10} height={10} style={{ marginRight: 3 }} />
+                <Trans>Add New</Trans>
+              </Button>
+            )}
+            <View style={{ flexShrink: 0 }}>
+              {/* @ts-expect-error fix me */}
+              <FilterButton onApply={onApplyFilter} />
+            </View>
+            {upcomingCount > 0 && (
+              <UpcomingToggleButton
+                accountId={accountId}
+                count={upcomingCount}
+              />
+            )}
+            {!showEmptyMessage && <UpcomingMonthsSelect />}
+          </SpaceBetween>
           <View style={{ flex: 1 }} />
 
           <Search

@@ -127,6 +127,7 @@ export function AccountRow({
         outline: 'none',
         borderRadius: radius.sm,
         cursor: 'pointer',
+        transition: 'background-color 120ms ease, box-shadow 120ms ease',
         color: isClosed ? theme.sidebarTextMuted : theme.sidebarItemText,
         ...(isUpdated && {
           fontWeight: 700,
@@ -136,6 +137,7 @@ export function AccountRow({
           backgroundColor: theme.sidebarItemBackgroundSelected,
           color: theme.sidebarItemTextSelected,
           fontWeight: 'normal',
+          boxShadow: `inset 3px 0 0 ${theme.sidebarItemAccentSelected}`,
         }),
         '&[data-hovered], &[data-focus-visible]': {
           backgroundColor: isActive
@@ -201,7 +203,8 @@ export function AccountRow({
                 binding={bindings.accountBalance(account.id)}
                 style={{
                   fontSize: 12,
-                  color: 'inherit',
+                  // Lighter balances so account names lead
+                  color: isActive ? 'inherit' : theme.sidebarTextSubdued,
                   marginLeft: spacing.xs,
                 }}
               />

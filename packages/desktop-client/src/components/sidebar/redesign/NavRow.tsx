@@ -34,12 +34,15 @@ export function NavRow({ title, Icon, to }: NavRowProps) {
           fontWeight: 500,
           textDecoration: 'none',
           color: theme.sidebarItemText,
+          transition: 'background-color 120ms ease, box-shadow 120ms ease',
           ':hover': { backgroundColor: theme.sidebarItemBackgroundHover },
         }}
         activeStyle={{
           backgroundColor: theme.sidebarItemBackgroundSelected,
           color: theme.sidebarItemTextSelected,
           fontWeight: 600,
+          // Accent bar on the left edge of the active item
+          boxShadow: `inset 3px 0 0 ${theme.sidebarItemAccentSelected}`,
         }}
       >
         <Icon width={15} height={15} style={{ flexShrink: 0 }} />
