@@ -112,9 +112,12 @@ type AllTransactionsProps = {
   balancesTotal: IntegerAmount | null;
   showBalances?: boolean | undefined;
   filtered?: boolean | undefined;
+  /** Route id of the view (account id, 'onbudget', 'offbudget', ...). */
+  viewId?: string | undefined;
   children: (
     transactions: TransactionEntity[],
     balances: Record<TransactionEntity['id'], IntegerAmount> | null,
+    upcomingCount: number,
   ) => ReactElement;
 };
 
@@ -125,10 +128,13 @@ function AllTransactions({
   balancesTotal,
   showBalances,
   filtered,
+  viewId,
   children,
 }: AllTransactionsProps) {
   const accountId = account?.id;
   const { dispatch: splitsExpandedDispatch } = useSplitsExpanded();
+  const [hideUpcoming] = useSyncedPref(`hide-upcoming-${viewId || 'all'}`);
+  const upcomingHidden = String(hideUpcoming) === 'true';
   const { previewTransactions, isLoading: isPreviewTransactionsLoading } =
     useAccountPreviewTransactions({ accountId });
 
@@ -179,10 +185,12 @@ function AllTransactions({
     return balances;
   }, [filtered, prependBalances, balances]);
 
-  if (!previewTransactions?.length || filtered) {
-    return children(transactions, balances);
+  const upcomingCount = filtered ? 0 : (previewTransactions?.length ?? 0);
+
+  if (!previewTransactions?.length || filtered || upcomingHidden) {
+    return children(transactions, balances, upcomingCount);
   }
-  return children(allTransactions, allBalances);
+  return children(allTransactions, allBalances, upcomingCount);
 }
 
 function getField(field?: string) {
@@ -1916,8 +1924,9 @@ class AccountInternal extends PureComponent<
         balancesTotal={balancesTotal}
         showBalances={showBalances}
         filtered={transactionsFiltered}
+        viewId={accountId}
       >
-        {(allTransactions, allBalances) => (
+        {(allTransactions, allBalances, upcomingCount) => (
           <SelectedProviderWithItems
             name="transactions"
             // When reconciled transactions are hidden they are still
@@ -1949,6 +1958,7 @@ class AccountInternal extends PureComponent<
                 transactions={transactions}
                 showExtraBalances={showExtraBalances ?? false}
                 showReconciled={showReconciled ?? false}
+                upcomingCount={upcomingCount}
                 showEmptyMessage={showEmptyMessage ?? false}
                 balanceQuery={balanceQuery}
                 filteredAmount={filteredAmount}

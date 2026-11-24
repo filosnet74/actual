@@ -37,6 +37,9 @@ export type SyncedPrefs = Partial<
     // read as a fallback for budgets that never used the column manager
     | `hide-cleared-${string}`
     | `hide-reconciled-${string}`
+    // Collapse scheduled (upcoming/due/missed) preview transactions at the
+    // top of an account's transaction list
+    | `hide-upcoming-${string}`
     | 'transaction-table-columns'
     | `transaction-table-columns-${string}`
     | `show-group-${string}`

@@ -16,6 +16,8 @@ import {
   SvgDownloadThickBottom,
   SvgLockClosed,
   SvgPencil1,
+  SvgViewHide,
+  SvgViewShow,
 } from '@actual-app/components/icons/v2';
 import { InitialFocus } from '@actual-app/components/initial-focus';
 import { Input } from '@actual-app/components/input';
@@ -70,6 +72,8 @@ type AccountHeaderProps = {
   transactions: TransactionEntity[];
   showExtraBalances: boolean;
   showReconciled: boolean;
+  /** Number of scheduled preview transactions (upcoming, due, missed). */
+  upcomingCount?: number;
   showEmptyMessage: boolean;
   balanceQuery: ComponentProps<typeof ReconcilingMessage>['balanceQuery'];
   reconcileAmount?: number | null;
@@ -142,6 +146,7 @@ export function AccountHeader({
   transactions,
   showExtraBalances,
   showReconciled,
+  upcomingCount = 0,
   showEmptyMessage,
   balanceQuery,
   reconcileAmount,
@@ -371,6 +376,9 @@ export function AccountHeader({
             {/* @ts-expect-error fix me */}
             <FilterButton onApply={onApplyFilter} />
           </View>
+          {upcomingCount > 0 && (
+            <UpcomingToggleButton accountId={accountId} count={upcomingCount} />
+          )}
           <View style={{ flex: 1 }} />
 
           <Search
@@ -821,5 +829,37 @@ function AccountMenu({
           : [{ name: 'close', text: t('Close account') } as const]),
       ]}
     />
+  );
+}
+
+type UpcomingToggleButtonProps = {
+  accountId?: string | undefined;
+  count: number;
+};
+
+function UpcomingToggleButton({ accountId, count }: UpcomingToggleButtonProps) {
+  const { t } = useTranslation();
+  const [hideUpcoming, setHideUpcoming] = useSyncedPref(
+    `hide-upcoming-${accountId || 'all'}`,
+  );
+  const isHidden = String(hideUpcoming) === 'true';
+  const Icon = isHidden ? SvgViewShow : SvgViewHide;
+
+  return (
+    <Button
+      variant="bare"
+      aria-pressed={isHidden}
+      aria-label={
+        isHidden
+          ? t('Show upcoming transactions')
+          : t('Collapse upcoming transactions')
+      }
+      onPress={() => setHideUpcoming(String(!isHidden))}
+    >
+      <Icon width={13} height={13} style={{ marginRight: 4 }} />
+      {isHidden
+        ? t('Show upcoming ({{count}})', { count })
+        : t('Collapse upcoming')}
+    </Button>
   );
 }
