@@ -6,6 +6,7 @@ import {
   SvgCheveronUpDown,
 } from '@actual-app/components/icons/v1';
 import { SvgSearchAlternate } from '@actual-app/components/icons/v2';
+import { styles } from '@actual-app/components/styles';
 import { theme } from '@actual-app/components/theme';
 import { spacing } from '@actual-app/components/tokens';
 import { View } from '@actual-app/components/view';
@@ -55,8 +56,7 @@ export function AccountsHeaderRow({
         to="/accounts"
         isExactPathMatch
         style={{
-          fontSize: 13,
-          fontWeight: 700,
+          ...styles.eyebrowText,
           textDecoration: 'none',
           color: theme.sidebarHeaderText,
         }}

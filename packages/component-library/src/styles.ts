@@ -42,18 +42,31 @@ export const styles: CSSProperties = {
     fontSize: 13,
     fontWeight: 700,
   },
+  // Display sizes use Inter's recommended negative tracking so large text
+  // reads tight and modern; body sizes stay at the default spacing.
   veryLargeText: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 600,
+    letterSpacing: '-0.022em',
+    lineHeight: 1.2,
   },
   largeText: {
     fontSize: 20,
-    fontWeight: 700,
-    letterSpacing: 0.5,
+    fontWeight: 600,
+    letterSpacing: '-0.015em',
+    lineHeight: 1.3,
   },
   mediumText: {
     fontSize: 15,
     fontWeight: 500,
+    letterSpacing: '-0.006em',
+  },
+  // Small uppercase label for section headers (sidebar groups, eyebrows).
+  eyebrowText: {
+    fontSize: 11,
+    fontWeight: 600,
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
   },
   smallText: {
     fontSize: 13,

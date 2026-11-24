@@ -19,13 +19,14 @@ colors:
 typography:
   display:
     fontFamily: 'Inter Variable, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
-    fontSize: '30px'
+    fontSize: '28px'
     fontWeight: 600
+    letterSpacing: '-0.022em'
   headline:
     fontFamily: 'Inter Variable, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
     fontSize: '20px'
-    fontWeight: 700
-    letterSpacing: '0.5px'
+    fontWeight: 600
+    letterSpacing: '-0.015em'
   title:
     fontFamily: 'Inter Variable, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif'
     fontSize: '15px'
@@ -141,8 +142,11 @@ All hex values in this file (frontmatter included) are the light-theme palette m
 
 ### Hierarchy
 
-- **Display** (600, 30px): Page-level headings and large balances. Rare.
-- **Headline** (700, 20px, 0.5px letter-spacing): Section titles.
+- **Display** (600, 28px, -0.022em): Large balances and hero headings. Rare.
+- **Page title** (600, 26px, -0.022em): Page and account names (`pageTitleStyle`).
+- **Headline** (600, 20px, -0.015em): Section titles.
+- **Eyebrow** (600, 11px, uppercase, +0.06em): Small section labels such as the sidebar "Accounts" header (`styles.eyebrowText`).
+- **Table header** (500, 12px, +0.01em): Column headers.
 - **Title** (500, 15px): Emphasized in-table and card text.
 - **Sheet title** (600, 18px): Centred title of a mobile bottom sheet. Mobile only.
 - **Body** (400, 16px): Default text.
@@ -173,6 +177,8 @@ Control values for Button/Input (paddingY / paddingX / min-height, px):
 `size="medium"` reproduces today's default control look exactly (5px/10px padding, 13px text, no min-height) and, on controls, inherits line-height like the default; the other sizes apply their scale line-height. `Text` always applies its size's line-height, while the omitted prop forces no line-height at all. `extra-large` narrow hits the 40px mobile touch target. The touch-target guarantee applies to touch-primary controls: at narrow, use `large` or `extra-large` for controls the user taps; `small` stays the compact 24px desktop-density choice at every breakpoint and is not meant for touch-primary controls.
 
 ### Named Rules
+
+**The Tracking Rule.** Text at 18px and above uses negative letter-spacing (about -0.015em to -0.022em, following Inter's dynamic metrics); 11-12px labels get slight positive tracking. Body text keeps the default. Text is rendered with grayscale antialiasing.
 
 **The Tabular Number Rule.** Every standalone financial figure renders with `font-feature-settings: "tnum", "ss01", "ss04"` (via `FinancialText` or `styles.tnum`) so digits align in columns and disambiguate. A proportional-figure money column is a bug.
 

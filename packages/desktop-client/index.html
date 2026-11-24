@@ -17,7 +17,7 @@
       crossorigin="use-credentials"
     />
     <meta name="msapplication-TileColor" content="#5c3dbb" />
-    <meta name="theme-color" content="#5c3dbb" />
+    <meta name="theme-color" content="#171717" />
 
     <style type="text/css">
       html,
@@ -25,6 +25,9 @@
         margin: 0;
         padding: 0;
         font-size: 13px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
 
       html,
@@ -62,8 +65,8 @@
       }
 
       *:focus {
-        /* colors.b5 */
-        outline-color: #2b8fed;
+        /* Neutral focus ring that follows the theme's accent */
+        outline-color: var(--color-formInputBorderSelected, #171717);
       }
 
       /* recharts makes chart surfaces and layers focusable for keyboard

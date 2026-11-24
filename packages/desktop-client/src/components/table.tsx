@@ -819,6 +819,8 @@ export function TableHeader({
           backgroundColor: theme.tableHeaderBackground,
           zIndex: 200,
           fontWeight: 500,
+          fontSize: 12,
+          letterSpacing: '0.01em',
           ...rowProps.style,
         }}
       >

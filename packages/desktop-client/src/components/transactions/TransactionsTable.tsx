@@ -340,7 +340,9 @@ const TransactionHeader = memo(
     return (
       <Row
         style={{
-          fontWeight: 300,
+          fontWeight: 500,
+          fontSize: 12,
+          letterSpacing: '0.01em',
           zIndex: 200,
           color: theme.tableHeaderText,
           backgroundColor: theme.tableHeaderBackground,

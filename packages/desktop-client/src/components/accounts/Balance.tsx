@@ -231,7 +231,8 @@ export function Balances({
               {...props}
               style={{
                 fontSize: 22,
-                fontWeight: 400,
+                fontWeight: 500,
+                letterSpacing: '-0.015em',
                 color:
                   props.value < 0
                     ? theme.numberNegative

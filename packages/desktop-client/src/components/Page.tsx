@@ -16,8 +16,9 @@ type PageHeaderProps = {
 };
 
 export const pageTitleStyle = {
-  fontSize: 25,
-  fontWeight: 500,
+  fontSize: 26,
+  fontWeight: 600,
+  letterSpacing: '-0.022em',
 } satisfies CSSProperties;
 
 export function PageHeader({ title, style }: PageHeaderProps) {
@@ -94,7 +95,8 @@ export function MobilePageHeader({
           flexDirection: 'row',
           flexBasis: '50%',
           fontSize: 17,
-          fontWeight: 500,
+          fontWeight: 600,
+          letterSpacing: '-0.012em',
           overflowY: 'auto',
           display: 'flex',
           margin: 0,
