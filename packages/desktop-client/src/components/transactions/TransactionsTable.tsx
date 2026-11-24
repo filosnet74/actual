@@ -3055,9 +3055,9 @@ function TransactionTableInner({
         style={{
           flex: 1,
           overflow: 'hidden',
-          // Open-list look: hide the lines between transaction rows (hover
-          // and selection still mark a row).
-          '--color-tableRowDivider': theme.tableBackground,
+          // Very light hairline between transaction rows: the input border
+          // colour blended into the table background.
+          '--color-tableRowDivider': `color-mix(in srgb, ${theme.formInputBorder} 60%, ${theme.tableBackground})`,
         }}
         data-testid="transaction-table"
       >
