@@ -82,8 +82,8 @@
       "sizes": "350x600"
     }
   ],
-  "theme_color": "#5c3dbb",
-  "background_color": "#5c3dbb",
+  "theme_color": "#4aa3e6",
+  "background_color": "#4aa3e6",
   "display": "standalone",
   "start_url": "./"
 }
