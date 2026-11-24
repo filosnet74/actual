@@ -187,9 +187,9 @@ export const DEFAULT_AMOUNT_COLUMN_WIDTHS: AmountColumnWidths = {
 const AMOUNT_COLUMN_CHAR_WIDTH = 7;
 const AMOUNT_COLUMN_PADDING = 16;
 
-// The running balance is rendered in a semibold weight, whose digits are a
-// little wider than regular ones.
-const BALANCE_COLUMN_CHAR_WIDTH = 7.6;
+// The running balance is rendered at 14px in a semibold weight, so its
+// digits are wider than the 13px regular amounts.
+const BALANCE_COLUMN_CHAR_WIDTH = 8.3;
 
 function measureAmountColumnWidth(
   values: string[],
@@ -2097,7 +2097,12 @@ const Transaction = memo(function Transaction({
                   ? theme.numberNegative
                   : theme.numberPositive,
             }}
-            style={{ ...styles.tnum, ...amountStyle, fontWeight: 600 }}
+            style={{
+              ...styles.tnum,
+              ...amountStyle,
+              fontWeight: 600,
+              fontSize: 14,
+            }}
             width={amountColumnWidths.balance}
             textAlign="right"
             privacyFilter
