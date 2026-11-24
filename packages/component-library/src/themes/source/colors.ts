@@ -516,15 +516,17 @@ export const colors = {
   },
   errorTextMenu: { all: 'red200' },
   errorBorder: { all: 'red500' },
+  // Light blue so upcoming scheduled transactions stand out from the
+  // otherwise monochrome palette.
   upcomingBackground: {
-    light: 'purple100',
-    dark: 'gray800',
-    midnight: 'gray700',
+    light: { raw: '#dbeafe' },
+    dark: { raw: '#1e3a5f' },
+    midnight: { raw: '#1e3a5f' },
   },
   upcomingText: {
-    light: 'purple700',
-    dark: 'purple100',
-    midnight: 'purple200',
+    light: { raw: '#1e40af' },
+    dark: { raw: '#bfdbfe' },
+    midnight: { raw: '#bfdbfe' },
   },
 
   formLabelText: { light: 'blue600', dark: 'purple150', midnight: 'purple150' },
