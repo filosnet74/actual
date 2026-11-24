@@ -88,6 +88,11 @@ export const colors = {
     dark: 'purple150',
     midnight: 'purple150',
   },
+  tableRowDivider: {
+    all: { ref: 'tableBorder' },
+    description:
+      'Line between table rows. The transactions table overrides it with the table background so its rows read as an open list.',
+  },
   tableBorderSeparator: {
     light: 'navy400',
     dark: 'navy400',

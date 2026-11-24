@@ -56,7 +56,15 @@ export function ToBudgetAmount({
 
   return (
     <View style={{ alignItems: 'center', ...style }}>
-      <Block>{isNegative ? t('Overbudgeted:') : t('To Budget:')}</Block>
+      <Block
+        style={{
+          ...styles.eyebrowText,
+          color: theme.pageTextSubdued,
+          marginBottom: 4,
+        }}
+      >
+        {isNegative ? t('Overbudgeted') : t('To Budget')}
+      </Block>
       <View>
         <Tooltip
           content={
@@ -83,7 +91,9 @@ export function ToBudgetAmount({
               className={css([
                 styles.veryLargeText,
                 {
-                  fontWeight: 400,
+                  fontSize: 34,
+                  fontWeight: 600,
+                  letterSpacing: '-0.025em',
                   userSelect: 'none',
                   cursor: onClick ? 'pointer' : 'default',
                   color: isPositive

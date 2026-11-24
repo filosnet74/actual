@@ -184,6 +184,9 @@ export const DEFAULT_AMOUNT_COLUMN_WIDTHS: AmountColumnWidths = {
 // Tabular numerals (styles.tnum) make every digit glyph the same width, so a
 // per-character estimate is a good enough proxy for the pixel width for a
 // formatted amount. This would need to be adjusted with the font size.
+// Taller than the shared table ROW_HEIGHT for a roomier transaction list.
+const TRANSACTION_ROW_HEIGHT = 36;
+
 const AMOUNT_COLUMN_CHAR_WIDTH = 7;
 const AMOUNT_COLUMN_PADDING = 16;
 
@@ -2152,6 +2155,7 @@ const Transaction = memo(function Transaction({
       <DropHighlight pos={showDropHighlight ? dropPos : null} />
       <Row
         ref={rowRef}
+        height={TRANSACTION_ROW_HEIGHT}
         {...dragProps}
         {...(pulse && { 'data-pulse': true })}
         style={{
@@ -3043,11 +3047,18 @@ function TransactionTableInner({
          //   the full height of the container ??? */}
 
       <View
-        style={{ flex: 1, overflow: 'hidden' }}
+        style={{
+          flex: 1,
+          overflow: 'hidden',
+          // Open-list look: hide the lines between transaction rows (hover
+          // and selection still mark a row).
+          '--color-tableRowDivider': theme.tableBackground,
+        }}
         data-testid="transaction-table"
       >
         <Table
           navigator={tableNavigator}
+          rowHeight={TRANSACTION_ROW_HEIGHT}
           ref={tableRef}
           listContainerRef={listContainerRef}
           items={transactionsToRender}

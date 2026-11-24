@@ -90,7 +90,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field(
         ...(width === 'flex' ? { flex: 1, flexBasis: 0 } : { width }),
         borderTopWidth: 1,
         borderBottomWidth: 1,
-        borderColor: theme.tableBorder,
+        borderColor: theme.tableRowDivider,
         ...styles.smallText,
         ...style,
       }}
@@ -195,7 +195,7 @@ export function Cell({
     justifyContent: 'center',
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: theme.tableBorder,
+    borderColor: theme.tableRowDivider,
     alignItems,
   };
 

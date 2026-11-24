@@ -1,16 +1,12 @@
 import { useCallback } from 'react';
 
 import { theme as themeStyle } from '@actual-app/components/theme';
-import type { Theme } from '@actual-app/core/types/prefs';
 import { css } from '@emotion/css';
-
-import { useTheme } from '#style';
 
 import { useTags } from './useTags';
 
 export function useTagCSS(opts?: { ellipsis?: boolean }) {
   const { data: tags = [] } = useTags();
-  const [theme] = useTheme();
 
   return useCallback(
     (
@@ -20,7 +16,6 @@ export function useTagCSS(opts?: { ellipsis?: boolean }) {
       const tagObj = tags.find(t => t.tag === tag);
       const { color, backgroundColor, backgroundColorHovered, isCustomColor } =
         getTagCSSColors(
-          theme,
           // fallback strategy: options color > tag color > default color > theme color (undefined)
           options.color ?? tagObj?.color,
         );
@@ -41,15 +36,14 @@ export function useTagCSS(opts?: { ellipsis?: boolean }) {
         userSelect: 'none',
         backgroundColor,
         // Users can give a tag its own colour on the Tags page; that colour
-        // becomes the pill's background, and the tag's label (e.g. "#food")
-        // is drawn in black or white, whichever contrasts with it. Tags
-        // without their own colour use the theme's default pill colours.
+        // tints the pill's background and the tag's label (e.g. "#food") is
+        // drawn in a deeper shade of it. Tags without their own colour use
+        // the theme's default pill colours.
         //
         // The pill is a bare Button, and Button's hover style changes the
         // label to the normal page text colour. On a default pill that's
-        // still readable, so it's left alone. On a user-coloured pill it can
-        // leave dark text on a dark background, so !important keeps the
-        // black or white label while hovered.
+        // fine, so it's left alone. On a user-coloured pill !important keeps
+        // the tinted label while hovered.
         //
         // getTagCSSColors returns plain colours (callers like the remove
         // badge mix them into other CSS, where !important would be invalid),
@@ -64,7 +58,7 @@ export function useTagCSS(opts?: { ellipsis?: boolean }) {
         },
       });
     },
-    [theme, tags, opts],
+    [tags, opts],
   );
 }
 
@@ -83,12 +77,10 @@ type TagPillStyle = TagPillColors & { isHidden: boolean };
  */
 export function useTagPillStyle() {
   const { data: tags = [] } = useTags();
-  const [theme] = useTheme();
 
   return (tag: string): TagPillStyle => {
     const tagObj = tags.find(t => t.tag === tag);
     const { color, backgroundColor, backgroundColorHovered } = getTagCSSColors(
-      theme,
       tagObj?.color,
     );
 
@@ -102,7 +94,6 @@ export function useTagPillStyle() {
 }
 
 function getTagCSSColors(
-  theme: Theme,
   color?: string | null,
 ): TagPillColors & { isCustomColor: boolean } {
   if (!color) {
@@ -114,27 +105,14 @@ function getTagCSSColors(
     };
   }
 
-  // see: https://www.w3.org/TR/AERT/#color-contrast
-  const r = parseInt(color.substring(1, 3), 16);
-  const g = parseInt(color.substring(3, 5), 16);
-  const b = parseInt(color.substring(5, 7), 16);
-  const brightnessDiff = (r * 299 + g * 587 + b * 114) / 1000;
-
-  if (brightnessDiff >= 125) {
-    return {
-      // oxlint-disable-next-line actual/no-color-literals
-      color: 'black',
-      backgroundColor: color,
-      backgroundColorHovered: `color-mix(in srgb, ${color} 80%, black)`,
-      isCustomColor: true,
-    };
-  }
-
+  // Soft "tinted" pill: a faint wash of the tag's colour as the background
+  // and a deepened version of the colour as the label. Mixing the label
+  // towards the theme's page text keeps it readable in light and dark
+  // themes alike (dark ink in light themes, light ink in dark themes).
   return {
-    // oxlint-disable-next-line actual/no-color-literals
-    color: 'white',
-    backgroundColor: color,
-    backgroundColorHovered: `color-mix(in srgb, ${color} 70%, white)`,
+    color: `color-mix(in srgb, ${color} 62%, ${themeStyle.pageText})`,
+    backgroundColor: `color-mix(in srgb, ${color} 16%, transparent)`,
+    backgroundColorHovered: `color-mix(in srgb, ${color} 28%, transparent)`,
     isCustomColor: true,
   };
 }
