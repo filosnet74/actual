@@ -4,17 +4,17 @@ description: Local-first personal finance, built around envelope budgeting
 # All color values are the light-theme palette mapping; dark and midnight
 # remap the same semantic roles via `theme.*` tokens (see The Semantic Token Rule).
 colors:
-  actual-purple: '#8719e0'
-  actual-purple-hover: '#a368fc'
-  navy-ink: '#102a43'
-  navy-slate: '#627d98'
-  navy-mist: '#e8ecf0'
-  navy-frost: '#f7fafc'
-  page-text: '#272630'
+  actual-purple: '#171717'
+  actual-purple-hover: '#404040'
+  navy-ink: '#141414'
+  navy-slate: '#737373'
+  navy-mist: '#f4f4f4'
+  navy-frost: '#fafafa'
+  page-text: '#171717'
   surface-white: '#ffffff'
   positive-green: '#147d64'
   negative-red: '#e12d39'
-  link-blue: '#1980d4'
+  link-blue: '#171717'
   warning-gold: '#b88115'
 typography:
   display:
@@ -40,7 +40,7 @@ typography:
     fontSize: '13px'
     fontWeight: 400
 rounded:
-  sm: '4px'
+  sm: '6px'
   sheet: '18px'
   pill: '999px'
 spacing:
@@ -90,6 +90,15 @@ The system explicitly rejects fintech-startup gloss (gradient heroes, glassmorph
 - Flat-first surfaces; shadows reserved for transient overlays
 
 ## 2. Colors
+
+> **Fork note (monochrome redesign).** In this fork the palette ramps in
+> `packages/component-library/src/themes/source/palette.ts` are remapped to
+> neutral greys: the `purple` ramp is now an ink ramp (near-black accent in
+> light, near-white accent in dark/midnight), and `navy`, `gray` and `blue`
+> are neutral. Colour is reserved for meaning: green/red money states,
+> amber warnings, chart series and user-chosen tag colours. The token names
+> below keep their historical names; the hex values in the frontmatter are
+> the current light-theme values.
 
 A calm navy-neutral base with one confident purple accent and strict semantic roles for money.
 

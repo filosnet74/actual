@@ -14,8 +14,8 @@ export const colors = {
   },
   pageBackgroundLineTop: {
     light: 'white',
-    dark: 'purple400',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   pageBackgroundLineMid: {
     light: 'navy100',
@@ -27,7 +27,7 @@ export const colors = {
     dark: 'navy150',
     midnight: 'gray150',
   },
-  pageText: { light: { raw: '#272630' }, dark: 'navy150', midnight: 'gray100' },
+  pageText: { light: { raw: '#171717' }, dark: 'navy150', midnight: 'gray100' },
   pageTextLight: { light: 'navy500', dark: 'navy300', midnight: 'gray200' },
   pageTextSubdued: { light: 'navy300', dark: 'navy500', midnight: 'gray400' },
   pageTextDark: { light: 'navy800', dark: 'navy100', midnight: 'gray100' },
@@ -36,15 +36,15 @@ export const colors = {
     dark: 'purple200',
     midnight: 'purple200',
   },
-  pageTextLink: { light: 'blue600', dark: 'purple400', midnight: 'purple300' },
+  pageTextLink: { light: 'blue600', dark: 'purple150', midnight: 'purple150' },
   pageTextLinkLight: {
     light: 'blue300',
     dark: 'purple200',
-    midnight: 'purple300',
+    midnight: 'purple150',
   },
 
   cardBackground: { light: 'white', dark: 'gray800', midnight: 'gray800' },
-  cardBorder: { light: 'purple700', dark: 'purple400', midnight: 'purple300' },
+  cardBorder: { light: 'purple700', dark: 'purple150', midnight: 'purple150' },
   cardShadow: { light: 'navy700', dark: 'navy700', midnight: 'gray900' },
 
   tableBackground: { light: 'white', dark: 'navy800', midnight: 'gray800' },
@@ -80,13 +80,13 @@ export const colors = {
   tableBorder: { light: 'navy100', dark: 'navy600', midnight: 'gray600' },
   tableBorderSelected: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple400',
+    dark: 'purple150',
+    midnight: 'purple200',
   },
   tableBorderHover: {
     light: 'purple400',
-    dark: 'purple300',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   tableBorderSeparator: {
     light: 'navy400',
@@ -95,7 +95,7 @@ export const colors = {
   },
   tableRowBackgroundHighlight: {
     light: 'blue150',
-    dark: 'purple800',
+    dark: 'gray700',
     midnight: 'purple150',
   },
   tableRowBackgroundHighlightText: {
@@ -228,8 +228,8 @@ export const colors = {
   },
   menuItemTextSelected: {
     light: 'purple300',
-    dark: 'purple400',
-    midnight: 'purple400',
+    dark: 'purple150',
+    midnight: 'purple200',
   },
   menuItemTextHeader: {
     light: 'navy400',
@@ -282,7 +282,7 @@ export const colors = {
   modalBorder: { light: 'white', dark: 'navy600', midnight: 'gray200' },
   mobileHeaderBackground: {
     light: 'purple400',
-    dark: 'purple800',
+    dark: 'gray700',
     midnight: 'gray900',
   },
   mobileHeaderText: { light: 'navy50', dark: 'navy150', midnight: 'purple200' },
@@ -297,14 +297,14 @@ export const colors = {
   mobileNavItem: { light: 'gray300', dark: 'navy150', midnight: 'gray150' },
   mobileNavItemSelected: {
     light: 'purple500',
-    dark: 'purple400',
+    dark: 'purple150',
     midnight: 'purple200',
   },
-  mobileAccountText: { all: 'blue800' },
+  mobileAccountText: { light: 'navy800', dark: 'navy150', midnight: 'gray150' },
   mobileTransactionSelected: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
 
   mobileViewTheme: { all: { ref: 'mobileHeaderBackground' } },
@@ -312,18 +312,18 @@ export const colors = {
 
   markdownNormal: {
     light: 'purple150',
-    dark: 'purple700',
-    midnight: 'purple700',
+    dark: 'gray800',
+    midnight: 'gray800',
   },
   markdownDark: {
     light: 'purple400',
-    dark: 'purple500',
-    midnight: 'purple500',
+    dark: 'gray500',
+    midnight: 'gray500',
   },
   markdownLight: {
     light: 'purple100',
-    dark: 'purple800',
-    midnight: 'purple800',
+    dark: 'gray700',
+    midnight: 'gray700',
   },
 
   buttonMenuText: { light: 'navy100', dark: 'navy200', midnight: 'gray200' },
@@ -349,16 +349,16 @@ export const colors = {
   },
   buttonMenuSelectedBorder: { all: { ref: 'buttonMenuSelectedBackground' } },
 
-  buttonPrimaryText: { all: 'white' },
+  buttonPrimaryText: { light: 'white', dark: 'gray900', midnight: 'gray900' },
   buttonPrimaryTextHover: { all: { ref: 'buttonPrimaryText' } },
   buttonPrimaryBackground: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   buttonPrimaryBackgroundHover: {
-    light: 'purple300',
-    dark: 'purple600',
+    light: 'purple400',
+    dark: 'white',
     midnight: { ref: 'buttonPrimaryBackground' },
   },
   buttonPrimaryBorder: { all: { ref: 'buttonPrimaryBackground' } },
@@ -410,8 +410,8 @@ export const colors = {
   buttonNormalSelectedText: { all: 'white' },
   buttonNormalSelectedBackground: {
     light: 'blue600',
-    dark: 'purple600',
-    midnight: 'purple500',
+    dark: 'gray600',
+    midnight: 'gray500',
   },
   buttonNormalDisabledText: {
     light: 'navy300',
@@ -448,8 +448,8 @@ export const colors = {
   },
   datePickerRangeBackground: {
     light: 'purple150',
-    dark: 'purple600',
-    midnight: 'purple600',
+    dark: 'gray600',
+    midnight: 'gray600',
   },
 
   buttonBareText: { all: { ref: 'pageText' } },
@@ -511,8 +511,8 @@ export const colors = {
   errorBorder: { all: 'red500' },
   upcomingBackground: {
     light: 'purple100',
-    dark: 'purple700',
-    midnight: 'purple800',
+    dark: 'gray800',
+    midnight: 'gray700',
   },
   upcomingText: {
     light: 'purple700',
@@ -538,8 +538,8 @@ export const colors = {
   },
   formInputBackgroundSelection: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple400',
+    dark: 'gray500',
+    midnight: 'gray500',
   },
   formInputBorder: { light: 'navy150', dark: 'navy600', midnight: 'gray600' },
   formInputTextReadOnlySelection: {
@@ -549,8 +549,8 @@ export const colors = {
   },
   formInputBorderSelected: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   formInputText: { light: 'navy900', dark: 'navy150', midnight: 'gray150' },
   formInputTextPlaceholder: {
@@ -566,32 +566,32 @@ export const colors = {
   formInputShadowSelected: {
     light: 'purple300',
     dark: 'purple200',
-    midnight: 'purple400',
+    midnight: 'purple200',
   },
   formInputTextHighlight: {
     light: 'purple200',
-    dark: 'purple400',
+    dark: 'purple150',
     midnight: 'purple200',
   },
   checkboxText: {
     light: { ref: 'tableBackground' },
-    dark: { ref: 'tableText' },
-    midnight: { ref: 'tableText' },
+    dark: 'gray900',
+    midnight: 'gray900',
   },
   checkboxBackgroundSelected: {
     light: 'blue500',
-    dark: 'purple300',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   checkboxBorderSelected: {
     light: 'blue500',
-    dark: 'purple300',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   checkboxShadowSelected: {
     light: 'blue300',
-    dark: 'purple500',
-    midnight: 'purple500',
+    dark: 'gray500',
+    midnight: 'gray500',
   },
   checkboxToggleBackground: {
     light: 'gray400',
@@ -600,8 +600,8 @@ export const colors = {
   },
   checkboxToggleBackgroundSelected: {
     light: 'purple600',
-    dark: 'purple300',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
   checkboxToggleDisabled: {
     light: 'gray200',
@@ -629,18 +629,18 @@ export const colors = {
   },
   pillBackgroundSelected: {
     light: 'blue150',
-    dark: 'purple600',
-    midnight: 'purple600',
+    dark: 'gray600',
+    midnight: 'gray600',
   },
   pillTextSelected: { light: 'blue900', dark: 'navy150', midnight: 'gray150' },
   pillBorderSelected: {
     light: 'purple500',
-    dark: 'purple400',
-    midnight: 'purple300',
+    dark: 'purple150',
+    midnight: 'purple150',
   },
 
   reportsRed: { all: 'red300' },
-  reportsBlue: { all: 'blue400' },
+  reportsBlue: { all: 'chartQual5' },
   reportsGreen: { all: 'green400' },
   reportsGray: { all: 'gray400' },
   reportsLabel: {
@@ -656,13 +656,13 @@ export const colors = {
 
   noteTagBackground: {
     light: 'purple125',
-    dark: 'purple700',
-    midnight: 'purple800',
+    dark: 'gray800',
+    midnight: 'gray700',
   },
   noteTagBackgroundHover: {
     light: 'purple150',
-    dark: 'purple500',
-    midnight: 'purple600',
+    dark: 'gray500',
+    midnight: 'gray600',
   },
   noteTagText: { light: 'black', dark: 'purple100', midnight: 'purple100' },
 
@@ -681,13 +681,13 @@ export const colors = {
 
   floatingActionBarBackground: {
     light: 'purple400',
-    dark: 'purple800',
+    dark: 'gray700',
     midnight: 'gray900',
   },
   floatingActionBarBorder: {
     light: { ref: 'floatingActionBarBackground' },
     dark: { ref: 'floatingActionBarBackground' },
-    midnight: 'purple300',
+    midnight: 'purple150',
   },
   floatingActionBarText: {
     light: 'navy50',
