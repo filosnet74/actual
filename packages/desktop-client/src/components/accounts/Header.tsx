@@ -23,11 +23,16 @@ import { InitialFocus } from '@actual-app/components/initial-focus';
 import { Input } from '@actual-app/components/input';
 import { Menu } from '@actual-app/components/menu';
 import { Popover } from '@actual-app/components/popover';
+import { Select } from '@actual-app/components/select';
 import { SpaceBetween } from '@actual-app/components/space-between';
 import { styles } from '@actual-app/components/styles';
 import { theme } from '@actual-app/components/theme';
 import { Tooltip } from '@actual-app/components/tooltip';
 import { View } from '@actual-app/components/view';
+import {
+  DEFAULT_UPCOMING_SCHEDULE_DAYS,
+  UPCOMING_LENGTH_PRESET_LABELS,
+} from '@actual-app/core/shared/schedules';
 import { tsToRelativeTime } from '@actual-app/core/shared/util';
 import type {
   AccountEntity,
@@ -379,6 +384,7 @@ export function AccountHeader({
           {upcomingCount > 0 && (
             <UpcomingToggleButton accountId={accountId} count={upcomingCount} />
           )}
+          {!showEmptyMessage && <UpcomingMonthsSelect />}
           <View style={{ flex: 1 }} />
 
           <Search
@@ -861,5 +867,54 @@ function UpcomingToggleButton({ accountId, count }: UpcomingToggleButtonProps) {
         ? t('Show upcoming ({{count}})', { count })
         : t('Collapse upcoming')}
     </Button>
+  );
+}
+
+// How far ahead scheduled transactions are previewed. Writes the existing
+// global `upcomingScheduledTransactionLength` pref (also editable from the
+// Schedules page), using its "<n>-month" custom format.
+const UPCOMING_MONTH_VALUES = [
+  'oneMonth',
+  '2-month',
+  '3-month',
+  '6-month',
+  '12-month',
+];
+
+function UpcomingMonthsSelect() {
+  const { t } = useTranslation();
+  const [upcomingLength = DEFAULT_UPCOMING_SCHEDULE_DAYS, setUpcomingLength] =
+    useSyncedPref('upcomingScheduledTransactionLength');
+
+  const options: Array<readonly [string, string]> = [
+    ['oneMonth', t('Next month')],
+    ['2-month', t('Next {{count}} months', { count: 2 })],
+    ['3-month', t('Next {{count}} months', { count: 3 })],
+    ['6-month', t('Next {{count}} months', { count: 6 })],
+    ['12-month', t('Next {{count}} months', { count: 12 })],
+  ];
+
+  const presetLabel =
+    UPCOMING_LENGTH_PRESET_LABELS[
+      upcomingLength as keyof typeof UPCOMING_LENGTH_PRESET_LABELS
+    ];
+  const defaultLabel = UPCOMING_MONTH_VALUES.includes(upcomingLength)
+    ? undefined
+    : presetLabel
+      ? t(presetLabel)
+      : t('Custom length');
+
+  return (
+    <View
+      style={{ flexShrink: 0 }}
+      title={t('How far ahead to show upcoming transactions')}
+    >
+      <Select
+        options={options}
+        value={upcomingLength}
+        defaultLabel={defaultLabel}
+        onChange={value => setUpcomingLength(value)}
+      />
+    </View>
   );
 }
