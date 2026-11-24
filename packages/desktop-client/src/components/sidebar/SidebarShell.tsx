@@ -84,6 +84,8 @@ export function SidebarShell({
               color: theme.sidebarItemText,
               height: '100%',
               backgroundColor: theme.sidebarBackground,
+              // Soft vertical fade towards grey at the bottom of the sidebar.
+              backgroundImage: `linear-gradient(180deg, ${theme.sidebarBackground} 0%, ${theme.sidebarBackgroundGradientEnd} 100%)`,
               // Keep clear of the status bar and screen edges in the mobile
               // apps (zero elsewhere).
               paddingTop: 'env(safe-area-inset-top)',

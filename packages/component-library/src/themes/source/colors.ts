@@ -132,6 +132,13 @@ export const colors = {
   toBudgetNegative: { all: { ref: 'budgetNumberNegative' } },
 
   sidebarBackground: { light: 'navy900', dark: 'navy900', midnight: 'gray900' },
+  sidebarBackgroundGradientEnd: {
+    light: 'navy150',
+    dark: 'gray700',
+    midnight: 'gray700',
+    description:
+      'Bottom colour of the sidebar\'s vertical gradient; the top is sidebarBackground.',
+  },
   sidebarItemBackgroundPending: { all: 'orange200' },
   sidebarItemBackgroundPositive: {
     light: 'green500',
