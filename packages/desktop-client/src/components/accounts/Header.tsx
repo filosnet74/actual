@@ -413,6 +413,7 @@ export function AccountHeader({
               />
             )}
             {!showEmptyMessage && <UpcomingMonthsSelect />}
+            {!showEmptyMessage && <TransactionsZoomSelect />}
           </SpaceBetween>
           <View style={{ flex: 1 }} />
 
@@ -943,6 +944,36 @@ function UpcomingMonthsSelect() {
         value={upcomingLength}
         defaultLabel={defaultLabel}
         onChange={value => setUpcomingLength(value)}
+      />
+    </View>
+  );
+}
+
+const ZOOM_LEVELS = [0.9, 1, 1.1, 1.25, 1.5] as const;
+
+// Proportional zoom for the transactions table (fonts, headers and row
+// heights scale together). Stored per device, since it depends on the screen.
+function TransactionsZoomSelect() {
+  const { t } = useTranslation();
+  const [zoom = 1, setZoom] = useLocalPref('transactions.zoom');
+
+  const options: Array<readonly [string, string]> = ZOOM_LEVELS.map(
+    level =>
+      [
+        String(level),
+        t('Zoom {{percent}}%', { percent: Math.round(level * 100) }),
+      ] as const,
+  );
+
+  return (
+    <View style={{ flexShrink: 0 }} title={t('Zoom the transactions table')}>
+      <Select
+        options={options}
+        value={String(zoom)}
+        defaultLabel={t('Zoom {{percent}}%', {
+          percent: Math.round(zoom * 100),
+        })}
+        onChange={value => setZoom(Number(value))}
       />
     </View>
   );

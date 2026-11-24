@@ -113,6 +113,8 @@ export type LocalPrefs = Partial<{
   reportsViewLabel: boolean;
   sidebarWidth: number;
   'mobile.showSpentColumn': boolean;
+  /** Zoom factor for the desktop account transactions table (1 = 100%). */
+  'transactions.zoom': number;
   'mobile.bankSyncProvidersCollapsed': boolean;
   /**
    * Timestamp (epoch ms) of the last automatic bank sync attempted by this

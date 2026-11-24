@@ -948,6 +948,11 @@ export type TableProps<T extends TableItem = TableItem> = {
   contentHeader?: ReactNode;
   loading?: boolean;
   rowHeight?: number;
+  /**
+   * CSS zoom applied by an ancestor. The auto-sized list is measured in the
+   * parent's pixels, so its size is divided by this to fill the same space.
+   */
+  zoom?: number;
   backgroundColor?: string;
   renderItem: (arg: {
     item: T;
@@ -978,6 +983,7 @@ export const Table = forwardRef(
       contentHeader,
       loading,
       rowHeight = ROW_HEIGHT,
+      zoom = 1,
       backgroundColor = theme.tableBackground,
       renderItem,
       renderEmpty,
@@ -1276,10 +1282,15 @@ export const Table = forwardRef(
             getEmptyContent(renderEmpty)
           ) : (
             <AutoSizer
-              renderProp={({ width = 0, height = 0 }) => {
-                if (width === 0 || height === 0) {
+              renderProp={({
+                width: measuredWidth = 0,
+                height: measuredHeight = 0,
+              }) => {
+                if (measuredWidth === 0 || measuredHeight === 0) {
                   return null;
                 }
+                const width = measuredWidth / zoom;
+                const height = measuredHeight / zoom;
 
                 return (
                   <AvoidRefocusScrollProvider>

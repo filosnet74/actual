@@ -127,7 +127,8 @@ export function AccountRow({
         outline: 'none',
         borderRadius: radius.sm,
         cursor: 'pointer',
-        transition: 'background-color 120ms ease, box-shadow 120ms ease',
+        position: 'relative',
+        transition: 'background-color 120ms ease',
         color: isClosed ? theme.sidebarTextMuted : theme.sidebarItemText,
         ...(isUpdated && {
           fontWeight: 700,
@@ -137,7 +138,17 @@ export function AccountRow({
           backgroundColor: theme.sidebarItemBackgroundSelected,
           color: theme.sidebarItemTextSelected,
           fontWeight: 'normal',
-          boxShadow: `inset 3px 0 0 ${theme.sidebarItemAccentSelected}`,
+          // Accent bar on the left edge of the active account
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            top: 6,
+            bottom: 6,
+            width: 3,
+            borderRadius: 2,
+            backgroundColor: theme.sidebarItemAccentSelected,
+          },
         }),
         '&[data-hovered], &[data-focus-visible]': {
           backgroundColor: isActive

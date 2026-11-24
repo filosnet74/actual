@@ -2981,12 +2981,17 @@ function TransactionTableInner({
     );
   };
 
+  const [zoom = 1] = useLocalPref('transactions.zoom');
+
   return (
     <View
       innerRef={containerRef}
       style={{
         flex: 1,
         cursor: 'default',
+        // Proportional zoom of the whole table (text, headers, row heights)
+        // from the zoom control in the account header.
+        ...(zoom !== 1 && { zoom }),
         ...props.style,
       }}
     >
@@ -3059,6 +3064,7 @@ function TransactionTableInner({
         <Table
           navigator={tableNavigator}
           rowHeight={TRANSACTION_ROW_HEIGHT}
+          zoom={zoom}
           ref={tableRef}
           listContainerRef={listContainerRef}
           items={transactionsToRender}

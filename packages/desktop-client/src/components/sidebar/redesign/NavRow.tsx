@@ -34,7 +34,8 @@ export function NavRow({ title, Icon, to }: NavRowProps) {
           fontWeight: 500,
           textDecoration: 'none',
           color: theme.sidebarItemText,
-          transition: 'background-color 120ms ease, box-shadow 120ms ease',
+          position: 'relative',
+          transition: 'background-color 120ms ease',
           ':hover': { backgroundColor: theme.sidebarItemBackgroundHover },
         }}
         activeStyle={{
@@ -42,7 +43,16 @@ export function NavRow({ title, Icon, to }: NavRowProps) {
           color: theme.sidebarItemTextSelected,
           fontWeight: 600,
           // Accent bar on the left edge of the active item
-          boxShadow: `inset 3px 0 0 ${theme.sidebarItemAccentSelected}`,
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            left: 0,
+            top: 6,
+            bottom: 6,
+            width: 3,
+            borderRadius: 2,
+            backgroundColor: theme.sidebarItemAccentSelected,
+          },
         }}
       >
         <Icon width={15} height={15} style={{ flexShrink: 0 }} />
