@@ -16,7 +16,7 @@ deploy/nas/build-image.sh
 Lo script costruisce l'immagine per processori Intel/AMD (`linux/amd64`, il
 caso della maggior parte dei NAS UGREEN) e crea in `deploy/nas/dist/`:
 
-- `actual-custom-<versione>-amd64.tar.gz`: l'immagine Docker
+- `actual-custom-<versione>-amd64.tar`: l'immagine Docker
 - `docker-compose.yml`: la configurazione del container
 
 Se il NAS ha un processore ARM: `deploy/nas/build-image.sh linux/arm64`.
@@ -27,8 +27,8 @@ Se il NAS ha un processore ARM: `deploy/nas/build-image.sh linux/arm64`.
    `/volume1/docker/actual` (da Finder, condivisione SMB).
 2. Importa l'immagine:
    - **App Docker di UGREEN**: _Immagini → Aggiungi → Importa da locale_ e
-     scegli il file `.tar.gz`.
-   - **Oppure via SSH**: `docker load -i actual-custom-<versione>-amd64.tar.gz`
+     scegli il file `.tar`.
+   - **Oppure via SSH**: `docker load -i actual-custom-<versione>-amd64.tar`
 3. Crea il container:
    - **App Docker di UGREEN**: _Progetti → Crea_, scegli la cartella
      `/volume1/docker/actual` e usa il `docker-compose.yml` incluso.
@@ -60,6 +60,6 @@ semplice:
 Dopo nuove modifiche al codice:
 
 1. Sul Mac rilancia `deploy/nas/build-image.sh`.
-2. Sul NAS importa il nuovo `.tar.gz` (stesso tag `actual-custom:latest`).
+2. Sul NAS importa il nuovo `.tar` (stesso tag `actual-custom:latest`).
 3. Ricrea il container: `docker compose up -d` (o _Riavvia/Ricrea_ dal
    progetto nell'app Docker). I dati in `actual-data/` restano intatti.
