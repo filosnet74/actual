@@ -1,12 +1,13 @@
 # Actual Budget (personalised build) for a home NAS.
 #
-# Image: built from this repository with ./build-image.sh, then imported on
-# the NAS (see README.md). Budgets, settings and users are stored in
-# ./actual-data next to this file, so they survive image updates.
+# Image: published from this fork to GitHub Container Registry with
+# ./publish-image.sh (or built locally with ./build-image.sh and imported).
+# Budgets, settings and users are stored in ./actual-data next to this file,
+# so they survive image updates.
 
 services:
   actual:
-    image: actual-custom:latest
+    image: ghcr.io/filosnet74/actual:latest
     container_name: actual
     restart: unless-stopped
     ports:

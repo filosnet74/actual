@@ -4,40 +4,36 @@ Questa cartella contiene tutto il necessario per far girare la tua versione
 personalizzata di Actual Budget (web app + server di sincronizzazione) in un
 container Docker sul NAS.
 
-## 1. Costruire l'immagine (sul Mac)
+## 1. Pubblicare l'immagine (sul Mac)
 
-Dalla cartella del progetto:
+L'immagine viene pubblicata su GitHub Container Registry come
+`ghcr.io/filosnet74/actual` (pubblica, quindi il NAS la scarica senza login):
 
 ```bash
 cd ~/Documents/actual
-deploy/nas/build-image.sh
+deploy/nas/publish-image.sh
 ```
 
-Lo script costruisce l'immagine per processori Intel/AMD (`linux/amd64`, il
-caso della maggior parte dei NAS UGREEN) e crea in `deploy/nas/dist/`:
+La prima volta serve `gh auth refresh -h github.com -s write:packages`.
 
-- `actual-custom-<versione>-amd64.tar`: l'immagine Docker
-- `docker-compose.yml`: la configurazione del container
-
-Se il NAS ha un processore ARM: `deploy/nas/build-image.sh linux/arm64`.
+In alternativa `deploy/nas/build-image.sh` crea un file `.tar` da importare a
+mano (`docker load -i <file>.tar`), utile senza connessione a GitHub.
 
 ## 2. Installare sul NAS
 
-1. Copia la cartella `deploy/nas/dist` sul NAS, per esempio in
-   `/volume1/docker/actual` (da Finder, condivisione SMB).
-2. Importa l'immagine:
-   - **App Docker di UGREEN**: _Immagini → Aggiungi → Importa da locale_ e
-     scegli il file `.tar`.
-   - **Oppure via SSH**: `docker load -i actual-custom-<versione>-amd64.tar`
-3. Crea il container:
-   - **App Docker di UGREEN**: _Progetti → Crea_, scegli la cartella
-     `/volume1/docker/actual` e usa il `docker-compose.yml` incluso.
-   - **Oppure via SSH**: `cd /volume1/docker/actual && docker compose up -d`
-4. Apri `http://<IP-del-NAS>:5006` e imposta la password del server al
-   primo accesso.
+1. Copia `docker-compose.yml` sul NAS, per esempio in
+   `/volume1/docker/actual`.
+2. **App Docker di UGREEN**: _Progetti → Crea_, scegli quella cartella e usa il
+   `docker-compose.yml`: l'immagine viene scaricata da ghcr.io.
+   **Oppure via SSH**: `cd /volume1/docker/actual && docker compose up -d`
+3. Apri `http://<IP-del-NAS>:5006` e imposta la password del server al primo
+   accesso (oppure accedi con quella esistente, se riusi dati di un Actual
+   precedente).
 
 I dati (budget, impostazioni, utenti) finiscono in `actual-data/` accanto al
-`docker-compose.yml`: includi quella cartella nei backup del NAS.
+`docker-compose.yml`: includi quella cartella nei backup del NAS. Per riusare i
+dati di un Actual già installato, punta il volume alla sua cartella dati
+(ferma prima il vecchio container e fanne una copia).
 
 ## 3. HTTPS (consigliato)
 
@@ -57,9 +53,6 @@ semplice:
 
 ## 4. Aggiornare
 
-Dopo nuove modifiche al codice:
-
-1. Sul Mac rilancia `deploy/nas/build-image.sh`.
-2. Sul NAS importa il nuovo `.tar` (stesso tag `actual-custom:latest`).
-3. Ricrea il container: `docker compose up -d` (o _Riavvia/Ricrea_ dal
-   progetto nell'app Docker). I dati in `actual-data/` restano intatti.
+1. Sul Mac rilancia `deploy/nas/publish-image.sh`.
+2. Sul NAS, nel progetto dell'app Docker, scegli _Aggiorna/Ricrea_ (oppure via
+   SSH `docker compose pull && docker compose up -d`). I dati restano intatti.
