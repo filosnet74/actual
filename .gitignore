@@ -123,3 +123,6 @@ actual.config.js
 
 # Mac App Store provisioning profiles, downloaded per machine
 packages/desktop-electron/mas/*.provisionprofile
+
+# NAS image archives built by deploy/nas/build-image.sh
+deploy/nas/dist
